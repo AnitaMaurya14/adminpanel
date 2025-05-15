@@ -51,7 +51,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Mobile backdrop */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 lg:hidden z-10"
+          className="fixed inset-0 bg-black/50 lg:hidden z-20"
           onClick={() => setSidebarOpen(false)}
         />
       )}

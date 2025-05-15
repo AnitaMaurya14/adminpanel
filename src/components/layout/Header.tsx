@@ -3,7 +3,6 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { 
   Bell, Search, Sun, Moon, Command, Menu
 } from 'lucide-react';
-import UserProfileCard from '../shared/UserProfileCard';
 
 interface HeaderProps {
   sidebarOpen: boolean;
@@ -13,7 +12,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ sidebarOpen, toggleSidebar, openQuickAction }) => {
   const { theme, toggleTheme } = useTheme();
-  const [showUserMenu, setShowUserMenu] = useState(false);
   
   return (
     <header className={`
@@ -80,30 +78,9 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, toggleSidebar, openQuickAc
         `}>
           <Bell size={20} />
         </button>
-        
-        {/* User menu */}
-        <div className="relative">
-          <button
-            onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white font-medium">
-              A
-            </div>
-          </button>
-          
-          {showUserMenu && (
-            <div className="absolute right-0 mt-2 z-50">
-              <UserProfileCard 
-                variant="dropdown" 
-                onClose={() => setShowUserMenu(false)} 
-              />
-            </div>
-          )}
-        </div>
       </div>
     </header>
   );
-}
+};
 
 export default Header;

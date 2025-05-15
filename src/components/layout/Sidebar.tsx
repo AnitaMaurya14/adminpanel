@@ -4,9 +4,8 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { 
   LayoutDashboard, Users, ShoppingBag, ShoppingCart, CreditCard, 
   Truck, TagsIcon, Ticket, Star, FileText, Settings, BarChart2, 
-  Store, RefreshCw, ChevronLeft, ChevronRight
+  Store, RefreshCw, ChevronLeft, ChevronRight, User, LogOut
 } from 'lucide-react';
-import UserProfileCard from '../shared/UserProfileCard';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -121,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   return (
     <aside
       className={`
-        fixed inset-y-0 left-0 z-20 flex flex-col transition-all duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-30 flex flex-col transition-all duration-300 ease-in-out
         ${theme === 'dark' ? 'bg-gray-900 border-r border-gray-800' : 'bg-white border-r border-gray-200'}
         ${isOpen ? 'w-64' : 'w-20'}
         ${isOpen ? 'lg:translate-x-0' : 'lg:translate-x-0'}
@@ -167,11 +166,55 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         <NavSection title="Configuration" items={configNavItems} />
       </div>
 
+      {/* User Profile Section */}
       <div className={`
         p-4 mt-auto border-t
         ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}
       `}>
-        <UserProfileCard variant="sidebar" />
+        {isOpen ? (
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white font-medium">
+                A
+              </div>
+              <div>
+                <p className={`text-sm font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                  Admin User
+                </p>
+                <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+                  admin@example.com
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1 pt-2">
+              <Link
+                to="/profile"
+                className={`
+                  flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors
+                  ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}
+                `}
+              >
+                <User size={16} />
+                <span>View Profile</span>
+              </Link>
+              <button
+                className={`
+                  flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors
+                  ${theme === 'dark' ? 'text-rose-400 hover:bg-gray-800' : 'text-rose-600 hover:bg-gray-100'}
+                `}
+              >
+                <LogOut size={16} />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white font-medium">
+              A
+            </div>
+          </div>
+        )}
       </div>
     </aside>
   );
