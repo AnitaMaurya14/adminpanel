@@ -105,3 +105,5 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, toggleSidebar, openQuickAc
     </header>
   );
 }
+
+export default Header;
